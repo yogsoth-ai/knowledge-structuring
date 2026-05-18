@@ -1,63 +1,92 @@
 ---
-name: knowledge-structuring
-description: Research Knowledge Structuring Engine — organizes acquired knowledge into ontologies, causal models, dimensional analyses, and argument maps via a structured wiki vault. Use this when you need to structure, organize, or systematize research knowledge beyond simple note-taking.
+name: wiki-vault
+description: Knowledge vault MCP server + companion skills for structured wiki compilation. Use this skill whenever you need to search, query, lint, or compile knowledge into the vault. Provides 7 MCP tools for ranked search, graph traversal, and batch validation, plus 8 skills (2 tactics + 6 SOPs) for knowledge compilation workflows.
 ---
 
-# Knowledge Structuring
+# Wiki Vault
 
-Transforms raw research knowledge into structured, queryable representations. Four campaigns address complementary structuring needs — use one or combine them depending on the research phase.
+Lightweight knowledge vault with structured graph, BM25 search, and batch validation. The vault stores research knowledge as interconnected markdown pages following the Karpathy llm-wiki pattern: Sources (immutable raw material) → Wiki (LLM-maintained synthesis) → Schema (configuration).
 
-## Campaign Routing
+## Philosophy
 
-| Signal | Campaign |
-|--------|----------|
-| 构建本体、define concepts、taxonomy、classify | → ontology-building |
-| 因果关系、causal mechanism、intervention、why does X cause Y | → causal-modeling |
-| 维度分析、design space、combinations、what axes exist | → dimensional-analysis |
-| 论证结构、claims、evidence strength、argument map | → argument-mapping |
-
-## MCP Dependencies
-
-| Server | Purpose |
-|--------|---------|
-| wiki-vault | Knowledge storage, search, graph, lint |
-| brave-search | Web research for structuring evidence |
-| apify | Google Scholar search |
-| alphaxiv | arXiv paper content and search |
-| semantic-scholar | Citation tracing, paper metadata |
-
-## Topic-Size Classification
-
-Classify the structuring task at campaign start. Size propagates to all strategies for budget tier selection.
-
-| Size | Criteria | Example |
-|------|----------|---------|
-| Small | Single concept cluster, <20 source pages | "Structure attention mechanism variants" |
-| Medium | Multi-concept domain, 20-50 source pages | "Build ontology of transformer architectures" |
-| Large | Cross-domain, 50+ source pages | "Map causal relationships in protein folding" |
-
-## Context-Management Protocol
-
-- **Campaign start**: `context-init` — load or create campaign context file
-- **After each strategy**: `context-checkpoint` + `knowledge-compilation` (wiki-vault tactic)
-- **Campaign end**: final `context-checkpoint` with summary metrics
+- **Single unified vault.** All knowledge lives in one vault regardless of research domain. Cross-domain connections emerge naturally.
+- **CC handles CRUD directly.** File creation, editing, and deletion are CC's native operations. The MCP server provides only what CC cannot do efficiently: ranked search, graph traversal, batch validation, and index maintenance.
+- **Obsidian-compatible.** Pages use standard markdown with YAML frontmatter and `[[wikilinks]]`. The vault is browsable in Obsidian without modification.
+- **Graph is first-class.** Every page should connect to the knowledge graph via typed edges. Orphans are failures.
 
 ## Four-Level Hierarchy
 
 ```
-ENTRY.md (this file) — campaign routing
-  → Campaign (4): domain-specific structuring programs
-    → Strategy (16): phased approaches with budgets
-      → Tactic (10): multi-SOP orchestration patterns
-        → SOP (32): single-responsibility operations
+ENTRY.md (this file)
+  → Tactic (2): multi-step orchestration patterns
+    → SOP (6): single-responsibility operations
+      → Tool (7): atomic MCP operations
 ```
 
-All skills are flat in `skills/`. Hierarchy is expressed via frontmatter `used-by` fields.
+## Skill Routing
 
-## Shared Principles
+| Signal | Skill |
+|--------|-------|
+| 编译研究成果、compile findings、ingest material | → knowledge-compilation (tactic) |
+| vault 健康检查、lint、orphan cleanup、merge duplicates | → vault-maintenance (tactic) |
+| 搜索 vault、find pages、check duplicates | → wiki-search (SOP) |
+| 图谱查询、explore neighborhood、find connections | → wiki-graph-query (SOP) |
+| 添加关系、create edge、link pages | → wiki-add-edge (SOP) |
+| 导入源材料、ingest source、capture raw material | → wiki-ingest-source (SOP) |
+| 创建/更新页面、compile page、synthesize | → wiki-compile-page (SOP) |
+| 运行 lint、fix issues、validate vault | → wiki-lint-fix (SOP) |
 
-- **兵法书, not pipeline.** Skills teach principles. CC decides execution strategy autonomously.
-- **Single unified vault.** All campaigns write to the same wiki-vault. Cross-campaign connections are a feature.
-- **Budget enforcement.** Every strategy has S/M/L budget floors. Cannot exit until 80% met.
-- **State Ledger.** Print progress before each iteration decision.
-- **Adversarial Completeness Probe.** After budget gate passes, qualitative self-check for blind spots.
+## MCP Tools (7)
+
+| Tool | Purpose |
+|------|---------|
+| `vault_search` | BM25 full-text search with type/tag filters |
+| `vault_add_edge` | Create typed edge (validates paths, rejects duplicates) |
+| `vault_query_graph` | BFS traversal from node (direction, depth, edge_type filter) |
+| `vault_graph_stats` | Global or per-node graph statistics |
+| `vault_lint` | Batch validation with optional auto-fix |
+| `vault_index` | Rebuild BM25 index (incremental or full) |
+| `vault_info` | Returns vault metadata (root, directories, types, stats) for session init |
+
+## Entity Types (9)
+
+| Type | Directory | Purpose |
+|------|-----------|---------|
+| source | sources/ | Immutable raw material (papers, web content, data) |
+| concept | concepts/ | Synthesized understanding of a topic |
+| entity | entities/ | Named entities (people, orgs, tools, datasets) |
+| claim | claims/ | Testable assertions with confidence scores |
+| relation | relations/ | Named relationships between concepts |
+| question | questions/ | Open research questions |
+| evidence | evidence/ | Supporting/refuting evidence with confidence |
+| failure | failures/ | Documented failed approaches |
+| topic | topics/ | High-level topic containers |
+
+## Edge Types (10)
+
+| Edge Type | Semantics |
+|-----------|-----------|
+| component_of | A is part of B |
+| instance_of | A is an example of B |
+| supported_by | A has evidence from B |
+| contradicts | A conflicts with B |
+| supersedes | A replaces B |
+| derived_from | A was built from B |
+| addresses | A answers/solves B |
+| raises | A creates/implies B |
+| failed_for | A didn't work for B |
+| related_to | Weak association |
+
+## Read/Write Rules
+
+- **CC writes files directly.** Page creation, editing, deletion — all via CC's native file tools.
+- **MCP for queries only.** Search, graph traversal, stats, lint — operations that need index/graph state.
+- **Sources are immutable.** Once created, source pages are never edited.
+- **Wiki pages evolve.** Updated as understanding deepens, confidence changes, new evidence arrives.
+- **Always search before creating.** Deduplication is a pre-condition for page creation.
+
+## Context-Management Integration
+
+- **Campaign start**: `context-init` (load/create campaign context file)
+- **After each strategy completes**: `context-checkpoint` + `knowledge-compilation`
+- **Vault state persists across sessions** via the file system — no special serialization needed

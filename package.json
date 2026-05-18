@@ -1,6 +1,6 @@
 {
   "name": "@yogsoth-ai/knowledge-structuring",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Multi-campaign knowledge structuring system with embedded wiki-vault MCP server — ontology building, causal modeling, dimensional analysis, argument mapping.",
   "type": "module",
   "main": "dist/server.js",
