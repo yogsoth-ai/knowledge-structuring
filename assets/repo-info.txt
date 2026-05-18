@@ -1,0 +1,3 @@
+knowledge-structuring
+
+Research Knowledge Structuring Engine — organizes acquired knowledge into ontologies, causal models, dimensional analyses, and argument maps via a structured wiki vault.
