@@ -36,7 +36,8 @@ Do NOT create edges to non-existent pages.
 2. Select appropriate edge_type based on the semantic relationship
 3. Call `vault_add_edge`
 4. If duplicate rejected, this is expected — the relationship already exists
-5. Return result to calling tactic
+5. **Inline wikilink:** Ensure the source page body contains `[[dir/slug]]` pointing to the target (dir/slug = target path minus `.md`). Place at a semantically relevant location. If already present, skip. If no suitable location, append a sentence containing the wikilink at end of body.
+6. Return result to calling tactic
 
 ## Edge Type Selection Guide
 

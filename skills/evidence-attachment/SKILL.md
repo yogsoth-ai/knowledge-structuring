@@ -25,6 +25,7 @@ Attach a piece of evidence to a claim with a typed relationship edge.
    - `evidence_quality:` strong | moderate | weak
    - `directness:` direct | indirect | analogical
 4. If evidence source page doesn't exist, create it first via wiki-ingest-source pattern
+5. **Inline wikilink:** Ensure the evidence page body contains `[[dir/slug]]` pointing to the claim (dir/slug = target path minus `.md`). Place inline at semantically relevant location. Skip if already present.
 
 ## HARD-GATE
 

@@ -43,14 +43,16 @@ Never blindly overwrite an existing page.
    ```
 4. Body contains synthesized content with `[[wikilinks]]` to related pages
 5. Add edges connecting this page to related pages
-6. Call `vault_index` (incremental)
+6. **Inline wikilinks:** For each edge created, ensure the page body contains `[[dir/slug]]` pointing to the target (dir/slug = target path minus `.md`). Place inline at semantically relevant location. Skip if already present.
+7. Call `vault_index` (incremental)
 
 ### Update Flow
 
 1. Read existing page content
 2. Apply changes (add information, update confidence, add wikilinks)
 3. Add new edges if new relationships discovered
-4. Call `vault_index` (incremental)
+4. **Inline wikilinks:** For each new edge, ensure the page body contains `[[dir/slug]]` pointing to the target (dir/slug = target path minus `.md`). Place inline at semantically relevant location. Skip if already present.
+5. Call `vault_index` (incremental)
 
 ## Yield
 

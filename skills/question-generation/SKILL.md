@@ -19,6 +19,7 @@ CC file write + `vault_add_edge`
 2. Write `questions/<question-slug>.md` with frontmatter (type: question)
 3. Body: the question, why it's interesting, what we'd need to answer it
 4. Add edges: raises (gap → question), related_to (question → relevant dimensions)
+5. **Inline wikilinks:** For each edge created, ensure the question page body contains `[[dir/slug]]` pointing to the target (dir/slug = target path minus `.md`). Place inline at semantically relevant location. Skip if already present.
 
 ## HARD-GATE
 

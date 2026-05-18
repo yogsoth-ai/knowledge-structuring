@@ -19,6 +19,7 @@ Create multiple edges efficiently. Used when a set of relationships has been ide
 2. Validate all paths exist
 3. Call vault_add_edge for each triple
 4. Report successes and failures (duplicates are expected, not errors)
+5. **Inline wikilinks:** For each successfully created edge, ensure the source page contains `[[dir/slug]]` pointing to the target (dir/slug = target path minus `.md`). Place inline at semantically relevant location; if none, append at end. Skip if already present.
 
 ## HARD-GATE
 

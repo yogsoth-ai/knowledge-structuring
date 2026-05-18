@@ -19,6 +19,7 @@ Create an edge representing a causal mechanism between two variables.
 2. Determine edge type: derived_from (direct causation), component_of (mediating variable)
 3. Call vault_add_edge with appropriate weight (strength of mechanism)
 4. Document mechanism description in the source variable's page body
+5. **Inline wikilink:** Ensure the source page contains `[[dir/slug]]` pointing to the target (dir/slug = target path minus `.md`). Place inline where the mechanism is documented. If already present, skip.
 
 ## HARD-GATE
 

@@ -19,6 +19,7 @@ CC file write + `vault_add_edge`
 2. Body: target variable, manipulation method, predicted effects, observed effects (if available)
 3. Add edges: addresses (intervention → question), derived_from (intervention → variable)
 4. Link supporting evidence
+5. **Inline wikilinks:** For each edge created, ensure the intervention page body contains `[[dir/slug]]` pointing to the target (dir/slug = target path minus `.md`). Place inline at semantically relevant location. Skip if already present.
 
 ## HARD-GATE
 

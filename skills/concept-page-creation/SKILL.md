@@ -19,7 +19,8 @@ CC file write + `vault_add_edge` + `vault_index`
 2. Write `concepts/<slug>.md` with frontmatter (type, title, created, tags)
 3. Body: one-paragraph definition + key properties + `[[wikilinks]]` to related concepts
 4. Add ≥1 edge connecting to existing graph
-5. Call vault_index (incremental)
+5. **Inline wikilinks:** For each edge created, ensure the concept page body contains `[[dir/slug]]` pointing to the target (dir/slug = target path minus `.md`). Place inline at semantically relevant location. Skip if already present.
+6. Call vault_index (incremental)
 
 ## HARD-GATE
 

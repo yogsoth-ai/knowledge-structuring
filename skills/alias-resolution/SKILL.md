@@ -19,8 +19,9 @@ Detect when two concept pages refer to the same thing under different names. Mer
 2. If multiple pages cover the same concept: choose canonical name
 3. Merge content from duplicate into canonical page
 4. Redirect all edges from duplicate to canonical
-5. Delete duplicate page
-6. Update index
+5. **Inline wikilinks:** After edge redirection, ensure the canonical page body contains `[[dir/slug]]` for all targets (dir/slug = target path minus `.md`). Place inline at semantically relevant locations. Skip if already present.
+6. Delete duplicate page
+7. Update index
 
 ## HARD-GATE
 

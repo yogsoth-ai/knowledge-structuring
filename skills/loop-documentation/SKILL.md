@@ -19,6 +19,7 @@ CC file write + `vault_add_edge`
 2. Body: loop type (reinforcing/balancing), variables involved, time delay, dominant conditions
 3. Add edges connecting the relation page to all variables in the loop
 4. Identify and document potential break points
+5. **Inline wikilinks:** For each edge created, ensure the loop page body contains `[[dir/slug]]` pointing to the target variable (dir/slug = target path minus `.md`). Place inline where the variable is mentioned. Skip if already present.
 
 ## HARD-GATE
 

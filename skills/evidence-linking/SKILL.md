@@ -19,6 +19,7 @@ Link evidence pages to the causal claims they support or contradict.
 2. Determine relationship: supported_by or contradicts
 3. Call vault_add_edge from evidence page to claim page
 4. Set weight based on evidence strength (hierarchy: RCT > observational > theoretical)
+5. **Inline wikilink:** Ensure the evidence page body contains `[[dir/slug]]` pointing to the claim (dir/slug = target path minus `.md`). Place inline at semantically relevant location. Skip if already present.
 
 ## HARD-GATE
 

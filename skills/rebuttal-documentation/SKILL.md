@@ -23,6 +23,7 @@ CC file write + `vault_add_edge`
 2. Body: the rebuttal stated clearly, with reasoning for why it contradicts the target
 3. Add edge: `contradicts` (rebuttal → target claim)
 4. Add edge: `derived_from` (rebuttal → source providing the rebuttal)
+5. **Inline wikilinks:** For each edge created, ensure the rebuttal page body contains `[[dir/slug]]` pointing to the target (dir/slug = target path minus `.md`). Place inline at semantically relevant location. Skip if already present.
 
 ## HARD-GATE
 

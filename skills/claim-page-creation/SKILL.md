@@ -23,6 +23,7 @@ CC file write + `vault_add_edge`
 2. Body: the claim stated clearly in one sentence, followed by brief context
 3. Add edge: `derived_from` (claim → source page)
 4. If related claims exist, add `related_to` edges
+5. **Inline wikilinks:** For each edge created, ensure the claim page body contains `[[dir/slug]]` pointing to the target (dir/slug = target path minus `.md`). Place inline at semantically relevant location. Skip if already present.
 
 ## HARD-GATE
 
