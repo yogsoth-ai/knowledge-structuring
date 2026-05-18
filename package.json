@@ -1,14 +1,48 @@
 {
   "name": "@yogsoth-ai/knowledge-structuring",
   "version": "0.1.0",
-  "type": "module",
   "description": "Multi-campaign knowledge structuring system with embedded wiki-vault MCP server — ontology building, causal modeling, dimensional analysis, argument mapping.",
+  "type": "module",
   "main": "dist/server.js",
+  "types": "dist/server.d.ts",
+  "bin": {
+    "knowledge-structuring": "dist/server.js"
+  },
+  "files": [
+    "dist",
+    "skills",
+    "README.md",
+    "LICENSE",
+    "ENTRY.md"
+  ],
   "scripts": {
     "build": "tsc",
     "mcp": "tsx src/server.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "npm run build && npm test"
   },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "wiki",
+    "knowledge-graph",
+    "research",
+    "obsidian",
+    "ontology",
+    "causal-modeling",
+    "argument-mapping",
+    "dimensional-analysis"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yogsoth-ai/knowledge-structuring.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yogsoth-ai/knowledge-structuring/issues"
+  },
+  "homepage": "https://github.com/yogsoth-ai/knowledge-structuring#readme",
+  "author": "yogsoth-ai",
+  "license": "Apache-2.0",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1",
     "zod": "^3.24.4"
@@ -21,6 +55,5 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "license": "Apache-2.0"
+  }
 }
