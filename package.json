@@ -1,8 +1,8 @@
 {
-  "name": "@yogsoth-ai/wiki-vault",
+  "name": "@yogsoth-ai/knowledge-structuring",
   "version": "0.1.0",
   "type": "module",
-  "description": "Research Knowledge Vault MCP Server — provides search, graph traversal, lint, and index operations for a structured Obsidian-compatible research wiki.",
+  "description": "Multi-campaign knowledge structuring system with embedded wiki-vault MCP server — ontology building, causal modeling, dimensional analysis, argument mapping.",
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",

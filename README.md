@@ -122,16 +122,41 @@ used-by: ontology-building    # ← parent campaign
 ## 🚀 Quick Start
 
 ```bash
-# Clone
+# Clone & install
 git clone https://github.com/yogsoth-ai/knowledge-structuring.git
+cd knowledge-structuring
+npm install
+
+# Run tests
+npm test
+
+# Start embedded wiki-vault MCP server
+npm run mcp
 
 # Deploy skills to Claude Code
 cp -r skills/* ~/.claude/skills/
 ```
 
+### MCP Configuration
+
+Add to your `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "wiki-vault": {
+      "command": "npx",
+      "args": ["tsx", "src/server.ts"],
+      "cwd": "/path/to/knowledge-structuring",
+      "env": { "VAULT_ROOT": "/path/to/your/vault" }
+    }
+  }
+}
+```
+
 ### Prerequisites
 
-- [wiki-vault](https://github.com/yogsoth-ai/wiki-vault) MCP server running
+- Node.js >= 20
 - [context-management](https://github.com/yogsoth-ai/context-management) available
 
 ---
