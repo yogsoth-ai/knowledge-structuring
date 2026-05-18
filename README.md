@@ -2,139 +2,123 @@
 
 <div align="center">
 
-> *"The art of war teaches us to rely not on the likelihood of the enemy's not coming, but on our own readiness to receive him."* — Sun Tzu
+> *"The only true wisdom is in knowing you know nothing."* — Socrates
 
 </div>
 
-# 🧠 knowledge-structuring
+# 📚 wiki-vault
 
-*Multi-campaign skill repo for structured knowledge construction across research domains.*
+*Lightweight knowledge vault MCP server for structured wiki compilation.*
 
-**knowledge-structuring is not a pipeline.** It is a collection of campaigns — each a self-contained doctrine for building a specific type of knowledge structure (ontologies, causal models, dimensional matrices, argument maps). CC has full autonomy at the campaign and strategy level. Skills teach principles and provide SOPs; they do not prescribe execution order.
+**wiki-vault is not a note-taking app.** It is a structured knowledge substrate — a typed graph of interconnected research artifacts that grows autonomously as AI agents compile findings. BM25 search, typed edges, batch validation, zero LLM dependencies. The vault is the persistent memory layer where research knowledge crystallizes into reusable structure.
 
 ---
 
 ## ⚡ What It Does
 
-- 🏗️ **Ontology Building** — extract concepts, type relations, validate taxonomies, refine hierarchies
-- 🔗 **Causal Modeling** — identify variables, map mechanisms, collect evidence, analyze interventions
-- 📐 **Dimensional Analysis** — discover dimensions, enumerate combinations, score novelty, prioritize gaps
-- ⚔️ **Argument Mapping** — extract claims, link evidence, assess strength, synthesize positions
-- 📚 **Wiki-Vault Integration** — all campaigns write to a unified vault via embedded wiki-vault skills
+- 🔍 **BM25 full-text search** — ranked retrieval across all vault pages with type/tag filters and contextual snippets
+- 🕸️ **Typed knowledge graph** — 10 edge types connecting 9 entity types, with BFS traversal and orphan detection
+- 🩺 **Batch validation** — 5 check types (broken links, orphans, missing frontmatter, duplicate edges, stale index) with auto-fix
+- 📊 **Graph statistics** — global metrics (density, orphans, type distribution) and per-node connectivity analysis
+- 🔄 **Incremental indexing** — only re-indexes changed files, full rebuild available on demand
+- 📖 **Obsidian-compatible** — standard markdown + YAML frontmatter + `[[wikilinks]]`, browsable without modification
 
 ---
 
 ## 🎯 Design Philosophy
 
-- **兵法书, not pipeline.** Campaigns are teaching material. CC reads them, internalizes the principles, and executes with full autonomy. Only SOPs approach fixed workflows.
-- **Single unified vault.** All campaigns write to the same vault. Cross-domain connections emerge naturally from the typed graph.
-- **Budget-gated depth.** Every strategy has quantitative floors (S/M/L tiers). Cannot exit until 80% met.
-- **Adversarial completeness.** After budget gate passes, a qualitative self-check probes for coverage gaps.
-- **State ledger transparency.** Progress is printed before every iteration — no silent drift.
+- **Single unified vault.** All knowledge in one place regardless of research domain. Cross-domain connections emerge naturally from the graph.
+- **CC handles CRUD directly.** File creation, editing, deletion are CC's native operations. The MCP server provides only what CC cannot do efficiently: ranked search, graph traversal, batch validation.
+- **Sources are immutable.** Raw material is preserved verbatim. Synthesis and evolution happen in wiki pages.
+- **Graph is first-class.** Every page connects via typed edges. Orphans are failures, not features.
+- **兵法书, not pipeline.** Skills teach principles and provide SOPs — CC decides strategy and execution autonomously.
 
 ---
 
 ## 🏗️ Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  CAMPAIGN (4)                                                │
-│  ontology-building · causal-modeling · dimensional-analysis  │
-│  argument-mapping                                            │
-├─────────────────────────────────────────────────────────────┤
-│  STRATEGY (16)                                               │
-│  domain-scoping · concept-extraction · relation-typing ···   │
-│  variable-identification · mechanism-mapping ···             │
-│  dimension-discovery · combination-mapping ···               │
-│  claim-extraction · evidence-linking-arg ···                 │
-├─────────────────────────────────────────────────────────────┤
-│  TACTIC (10)                                                 │
-│  concept-decomposition · hierarchy-construction ···          │
-│  counterfactual-reasoning · evidence-weighing ···            │
-│  axis-extraction · matrix-generation ···                     │
-│  claim-decomposition · strength-assessment                   │
-├─────────────────────────────────────────────────────────────┤
-│  SOP (36)                                                    │
-│  seed-concept-search · source-gathering · concept-page ···  │
-│  variable-page-creation · mechanism-edge-creation ···        │
-│  dimension-page-creation · axis-validation ···               │
-│  claim-page-creation · evidence-attachment ···               │
-├─────────────────────────────────────────────────────────────┤
-│  WIKI-VAULT SKILLS (8 embedded)                              │
-│  knowledge-compilation · vault-maintenance                   │
-│  wiki-search · wiki-graph-query · wiki-add-edge             │
-│  wiki-ingest-source · wiki-compile-page · wiki-lint-fix     │
-└─────────────────────────────────────────────────────────────┘
+```bash
+┌─────────────────────────────────────────────────────────┐
+│  MCP Server (7 tools)                                   │
+│  vault_search · vault_add_edge · vault_query_graph      │
+│  vault_graph_stats · vault_lint · vault_index           │
+│  vault_info                                             │
+├─────────────────────────────────────────────────────────┤
+│  Core Modules                                           │
+│  index.ts (BM25) · graph.ts (edges+traversal) · lint.ts│
+├─────────────────────────────────────────────────────────┤
+│  Vault (filesystem)                                     │
+│  9 entity dirs · _edges.jsonl · _index.json · _schema.md│
+└─────────────────────────────────────────────────────────┘
 ```
 
-### Campaigns
+### Tools
 
-| Campaign | Strategies | Tactics | SOPs | Purpose |
-|----------|-----------|---------|------|---------|
-| ontology-building | 5 | 3 | 10 | Build domain ontologies |
-| causal-modeling | 5 | 3 | 10 | Construct causal graphs |
-| dimensional-analysis | 3 | 2 | 6 | Map design spaces |
-| argument-mapping | 3 | 2 | 6 | Structure debates |
+| Tool | Description |
+|------|-------------|
+| `vault_search` | BM25 full-text search with type/tag filters and snippets |
+| `vault_add_edge` | Create typed edge between pages (validates, deduplicates) |
+| `vault_query_graph` | BFS traversal from node with direction/depth/type filters |
+| `vault_graph_stats` | Global or per-node graph statistics and orphan detection |
+| `vault_lint` | Batch validation (5 check types) with optional auto-fix |
+| `vault_index` | Rebuild search index (incremental or full) |
+| `vault_info` | Returns vault metadata (root, directories, types, stats) for session init |
 
-### Enforcement Mechanisms
+### Skills (8)
 
-| Mechanism | Layer | Purpose |
-|-----------|-------|---------|
-| Budget Table | Campaign | S/M/L quantitative floors per metric |
-| State Ledger | Strategy | Progress table printed before every iteration |
-| Budget Gate | Strategy | Cannot exit until 80% of targets met |
-| Adversarial Probe | Strategy | Qualitative self-check after budget gate |
-| Minimum Yield | Tactic | Hard floor on output per invocation |
-| HARD-GATE | SOP | Precondition that must be satisfied |
+| Level | Skill | Purpose |
+|-------|-------|---------|
+| Tactic | knowledge-compilation | Compile research findings into vault pages |
+| Tactic | vault-maintenance | Vault health upkeep and cleanup |
+| SOP | wiki-search | Search before creating (deduplication) |
+| SOP | wiki-graph-query | Explore node neighborhood |
+| SOP | wiki-add-edge | Create typed relationships |
+| SOP | wiki-ingest-source | Write immutable source pages |
+| SOP | wiki-compile-page | Create/update synthesized pages |
+| SOP | wiki-lint-fix | Run lint and optionally fix |
 
-### MCP Dependencies
+### Entity Types
 
-| Server | Tools Used |
-|--------|-----------|
-| wiki-vault | vault_search, vault_add_edge, vault_query_graph, vault_graph_stats, vault_lint, vault_index |
-| context-management | context-init, context-checkpoint |
+| Type | Directory | Purpose |
+|------|-----------|---------|
+| source | sources/ | Immutable raw material |
+| concept | concepts/ | Synthesized understanding |
+| entity | entities/ | Named entities (people, orgs, tools) |
+| claim | claims/ | Testable assertions with confidence |
+| relation | relations/ | Named relationships |
+| question | questions/ | Open research questions |
+| evidence | evidence/ | Supporting/refuting evidence |
+| failure | failures/ | Documented failed approaches |
+| topic | topics/ | High-level topic containers |
 
----
+### Edge Types
 
-## 📂 Skill Hierarchy
-
-All skills live flat in `skills/<name>/SKILL.md`. Hierarchy is expressed via frontmatter `used-by` field:
-
-```yaml
----
-name: concept-extraction
-execution: strategy
-used-by: ontology-building    # ← parent campaign
----
-```
-
-### Four Levels
-
-| Level | Execution | Autonomy | Count |
-|-------|-----------|----------|-------|
-| Campaign | campaign | Full — CC decides strategy order, iteration count | 4 |
-| Strategy | strategy | High — CC decides tactic selection, iteration within budget | 16 |
-| Tactic | tactic | Moderate — CC decides SOP order, has minimum yield | 10 |
-| SOP | sop | Low — follows protocol, wraps single tool operation | 36 + 8 |
+| Edge Type | Semantics |
+|-----------|-----------|
+| component_of | A is part of B |
+| instance_of | A is an example of B |
+| supported_by | A has evidence from B |
+| contradicts | A conflicts with B |
+| supersedes | A replaces B |
+| derived_from | A was built from B |
+| addresses | A answers/solves B |
+| raises | A creates/implies B |
+| failed_for | A didn't work for B |
+| related_to | Weak association |
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Clone & install
-git clone https://github.com/yogsoth-ai/knowledge-structuring.git
-cd knowledge-structuring
+# Install
 npm install
 
-# Run tests
+# Run tests (77 tests)
 npm test
 
-# Start embedded wiki-vault MCP server
-npm run mcp
-
-# Deploy skills to Claude Code
-cp -r skills/* ~/.claude/skills/
+# Start MCP server
+VAULT_ROOT=/path/to/vault npx @yogsoth-ai/wiki-vault
 ```
 
 ### MCP Configuration
@@ -143,21 +127,14 @@ Add to your `.mcp.json`:
 
 ```json
 {
-  "mcpServers": {
-    "wiki-vault": {
-      "command": "npx",
-      "args": ["tsx", "src/server.ts"],
-      "cwd": "/path/to/knowledge-structuring",
-      "env": { "VAULT_ROOT": "/path/to/your/vault" }
-    }
+  "wiki-vault": {
+    "type": "stdio",
+    "command": "npx",
+    "args": ["@yogsoth-ai/wiki-vault"],
+    "env": { "VAULT_ROOT": "/path/to/your/vault" }
   }
 }
 ```
-
-### Prerequisites
-
-- Node.js >= 20
-- [context-management](https://github.com/yogsoth-ai/context-management) available
 
 ---
 
