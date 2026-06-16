@@ -10,6 +10,8 @@
 
 *Lightweight knowledge vault MCP server for structured wiki compilation.*
 
+> 🧭 **Part of the [De-Anthropocentric Research Engine](https://github.com/yogsoth-ai/de-anthropocentric-research-engine).** This repository is the `knowledge-structuring` component of DARE — the full autonomous research-orchestration system — providing the wiki-vault MCP server plus the skills that compile research findings into structured knowledge (ontologies, causal graphs, design-space maps, argument graphs). DARE bundles it together with eight other research packages into a single self-contained clone. For the complete engine and the recommended way to use it, see the [main repository](https://github.com/yogsoth-ai/de-anthropocentric-research-engine).
+
 **wiki-vault is not a note-taking app.** It is a structured knowledge substrate — a typed graph of interconnected research artifacts that grows autonomously as AI agents compile findings. BM25 search, typed edges, batch validation, zero LLM dependencies. The vault is the persistent memory layer where research knowledge crystallizes into reusable structure.
 
 ---
@@ -146,4 +148,4 @@ Add to your `.mcp.json`:
 
 ---
 
-*Part of the [Yogsoth AI](https://github.com/yogsoth-ai) ecosystem. Built by [Pthahnix](https://github.com/Pthahnix).*
+*A component of the [De-Anthropocentric Research Engine](https://github.com/yogsoth-ai/de-anthropocentric-research-engine), part of the [Yogsoth AI](https://github.com/yogsoth-ai) ecosystem. Built by [Pthahnix](https://github.com/Pthahnix).*
